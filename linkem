@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd ~
+
+ln -s .dotfiles/.screenrc
+ln -s .dotfiles/.tmux.conf
+
+cd -
