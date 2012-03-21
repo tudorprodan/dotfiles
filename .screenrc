@@ -1,0 +1,1 @@
+hardstatus alwayslastline "%{= k}%{W}%H %{g}|%= %{= kw}%?%-Lw%?%{r}|%{W}%n*%f%t%?(%u)%?%{r}|%{w}%?%+Lw%?%?%= %{g}| %{W}%c "
