@@ -1,0 +1,59 @@
+#!/bin/bash
+
+run() {
+    ssh -q root@router $*
+}
+
+test_nodrop_part="[[ -z \`iptables -L -n | grep 'DROP.*192\.168\.1\.147'\` ]]"
+
+count_cmd='for i in `grep 0x /proc/net/arp | cut -d " " -f1`; do echo "$i connection count: $(grep -c $i /proc/net/ip_conntrack)"; done'
+
+check_cmd="
+    if $test_nodrop_part;
+    then
+        echo [-] Not dropping packets for .147;
+    else
+        echo [-] Dropping packets for .147;
+    fi
+"
+
+disable_cmd="
+    if $test_nodrop_part;
+    then
+        iptables -I FORWARD 1 -s 192.168.1.147 -j DROP;
+        echo [+] Dropping packets from .147;
+    else
+        echo [*] Was already dropping packets from .147;
+    fi
+"
+
+enable_cmd="
+    if $test_nodrop_part;
+    then
+        echo [*] Was not dropping packets from .147;
+    else
+        iptables -D FORWARD -s 192.168.1.147 -j DROP;
+        echo [+] Am no longer dropping packets from .147;
+    fi
+"
+
+
+test_cmd="
+    echo '[-] <NOP>'
+"
+
+case $1 in
+    count)
+        run $count_cmd ;;
+    check)
+        run $check_cmd ;;
+    disable)
+        run $disable_cmd ;;
+    enable)
+        run $enable_cmd ;;
+    test)
+        run $test_cmd ;;
+    *)
+        echo "Usage: $0 <count|check|disable|enable|test>"
+esac
+
