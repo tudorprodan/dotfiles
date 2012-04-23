@@ -29,14 +29,21 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git django brew osx)
+plugins=(django brew osx)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+alias ll='ls -alhG'
+alias w="w -f"
+alias vi="vim"
+alias du="du -h"
+
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/MacGPG2/bin"
 export LSCOLORS="exfxcxdxbxegedabagacad"
+export EDITOR=vim
 
 setopt NoMenuComplete
 
-PROMPT='%{$fg[red]%}➥ %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}# %{$reset_color%}'
+PROMPT='%{$fg[red]%} ➥ %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}# %{$reset_color%}'
+
