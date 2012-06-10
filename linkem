@@ -4,5 +4,7 @@ cd ~
 
 ln -s .dotfiles/.screenrc
 ln -s .dotfiles/.tmux.conf
+ln -s .dotfiles/.zshrc
+ls -s .dotfiles/.oh-my-zsh
 
 cd -
