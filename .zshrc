@@ -51,7 +51,7 @@ export EDITOR=vim
 #PROMPT='%{$fg[red]%} ➥ %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}# %{$reset_color%}'
 
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 
 POWERLINE_COLOR_BG_GRAY=$BG[240]
@@ -88,4 +88,4 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
 #'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[white]%}$'\u2b80'%{$reset_color%}%{$fg[grey]%}%{$bg[white]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[white]%}$'\u2b80%{$reset_color%} '
 
 PROMPT='
-'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}$'\u2b80%{$reset_color%} '
+'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\u2b80'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\u2b80'%{$reset_color%}' '
