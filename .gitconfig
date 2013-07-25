@@ -1,6 +1,6 @@
 [user]
-    name = "Tudor Prodan"
-    email = "tudor.prodan@gmail.com"
+	name = Tudor Prodan
+	email = tudor.prodan@gmail.com
 
 [alias]
     st = "status -sb"
@@ -9,7 +9,7 @@
     pr = "pull --rebase"
     pp = "!git pull && git push"
     ppr = "!git pull --rebase && git push"
-    plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+    plog = "log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 [color]
     ui = auto
@@ -24,12 +24,12 @@
     cmd = "diffmerge $LOCAL $REMOTE"
 
 [core]
-    excludesfile = ~/.gitignore_global
+	excludesfile = /Users/tudor/.gitignore_global
 
 [difftool "sourcetree"]
-    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path =
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 
 [mergetool "sourcetree"]
-    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-    trustExitCode = true
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
