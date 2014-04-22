@@ -67,7 +67,7 @@ GIT_DIRTY_COLOR=$FG[133]
 GIT_CLEAN_COLOR=$FG[118]
 GIT_PROMPT_INFO=$FG[012]
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" \u2b60 "
+ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$GIT_PROMPT_INFO%}"
 ZSH_THEME_GIT_PROMPT_DIRTY=" %{$GIT_DIRTY_COLOR%}✘"
 ZSH_THEME_GIT_PROMPT_CLEAN=" %{$GIT_CLEAN_COLOR%}✔"
@@ -88,5 +88,8 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
 #PROMPT='
 #'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[white]%}$'\u2b80'%{$reset_color%}%{$fg[grey]%}%{$bg[white]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[white]%}$'\u2b80%{$reset_color%} '
 
+#PROMPT='
+#'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\u2b80'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\u2b80'%{$reset_color%}' '
+
 PROMPT='
-'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\u2b80'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\u2b80'%{$reset_color%}' '
+'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\ue0b0'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\ue0b0'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\ue0b0'%{$reset_color%}' '
