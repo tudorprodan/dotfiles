@@ -41,6 +41,7 @@ alias ll='ls -alhG'
 alias w="w -f"
 alias vi="vim"
 alias du="du -h -d 1"
+alias vact="source .venv/bin/activate"
 
 #export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/MacGPG2/bin"
 export LSCOLORS="exfxcxdxbxegedabagacad"
