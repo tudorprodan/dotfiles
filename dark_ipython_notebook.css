@@ -45,8 +45,16 @@ div.output_subarea {font-weight: normal; color: #c0c5ce;}
 div.output_html { font-family: sans-serif; }
 table.dataframe tr {border: 1px #c0c5ce;}
 
-div.cell.selected {border-radius: 0px;}
-div.cell.edit_mode {border-radius: 0px; border: thin solid #b48ead;}
+
+div.cell.selected {
+    background: linear-gradient(to right, #589186 -40px, #589186 5px, transparent 5px, transparent 100%);
+}
+
+.edit_mode div.cell.selected {
+    background: linear-gradient(to right, #8A3838 -40px, #8A3838 5px, transparent 5px, transparent 100%);
+    border-color: #845e7f;
+}
+
 div.text_cell_render, div.output_html {color: #c0c5ce;}
 
 span.ansiblack {color: #343d46;}
@@ -150,10 +158,6 @@ div#notebook {
 
 .CodeMirror {
     font-size: 13px;
-}
-
-.edit_mode div.cell.selected {
-    border-color: #845e7f;
 }
 
 .header-bar {
