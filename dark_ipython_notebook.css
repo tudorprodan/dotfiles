@@ -25,12 +25,9 @@ a {color: #8fa1b3;}
 /* NOTEBOOK */
 
 /* comment out this line to bring the toolbar back */
-/*div#maintoolbar, div#header {display: none !important;}*/
+/* div#maintoolbar, div#header {display: none !important;} */
 
-div#notebook {
-border-top: none;
-font-size: 13px;
-}
+div#notebook {border-top: none;}
 
 div.input_prompt {color: #ab7967;}
 div.output_prompt {color: #b48ead;}
@@ -49,8 +46,7 @@ div.output_html { font-family: sans-serif; }
 table.dataframe tr {border: 1px #c0c5ce;}
 
 div.cell.selected {border-radius: 0px;}
-/*div.cell.edit_mode {border-radius: 0px; border: thin solid #b48ead;}*/
-div.cell.edit_mode {border-radius: 0px; border: thin solid #845e7f;}
+div.cell.edit_mode {border-radius: 0px; border: thin solid #b48ead;}
 div.text_cell_render, div.output_html {color: #c0c5ce;}
 
 span.ansiblack {color: #343d46;}
@@ -61,7 +57,10 @@ span.ansipurple {color: #b48ead;}
 span.ansired {color: #bf616a;}
 span.ansiyellow {color: #ebcb8b;}
 
-div.output_stderr {background-color: #bf616a;}
+div.output_stderr {
+    /* background-color: #bf616a; */
+    background-color: #3B2B2B;
+}
 div.output_stderr pre {color: #dfe1e8;}
 
 .cm-s-ipython.CodeMirror {background: #2b303b; color: #dfe1e8;}
@@ -79,7 +78,6 @@ div.output_stderr pre {color: #dfe1e8;}
 .cm-s-ipython span.cm-string {color: #ebcb8b;}
 .cm-s-ipython span.cm-operator {color: #ab7967;}
 .cm-s-ipython span.cm-builtin {color: #b48ead;}
-.cm-s-ipython span.cm-meta {color: #bf616a;}
 
 .cm-s-ipython span.cm-variable {color: #a3be8c;}
 .cm-s-ipython span.cm-variable-2 {color: #8fa1b3;}
@@ -90,11 +88,6 @@ div.output_stderr pre {color: #dfe1e8;}
 .cm-s-ipython span.cm-link {color: #b48ead;}
 
 .cm-s-ipython .CodeMirror-matchingbracket { text-decoration: underline; color: #dfe1e8 !important;}
-
-.output_subarea.output_png img,
-.output_subarea svg.mpld3-figure {
-    background-color: white;
-}
 
 .rendered_html code {background: #2b303b; color: #dfe1e8;}
 .rendered_html code .keyword {color: #bf616a;}
@@ -115,13 +108,54 @@ div.output_stderr pre {color: #dfe1e8;}
 .code_cell .highlight .c {color: #ab7967;}
 .code_cell .highlight .bp {color: #b48ead;}
 .code_cell .highlight .ow {color: #ab7967;}
-.code_cell .highlight .sd {color: #ab7967;}
-.code_cell .highlight .nd {color: #bf616a;}
-.code_cell .highlight .mf {color: #b48ead;}
 
+
+.output_subarea.output_png img {
+    background-color: white;
+}
 
 div#pager_splitter {
     height: 1px;
     border: none;
     background: black;
+}
+
+#notebook-container {
+    background-color: #2B303B;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+div#notebook {
+    background-color: #2B303B;
+}
+
+body > #header {
+    background-color: #2B303B;
+}
+
+.navbar-default {
+    background-color: #2B303B;
+    border-color: #3A414E;
+}
+
+.notebook_app #header {
+    box-shadow: none;
+}
+
+div#notebook {
+    border-top: none;
+    font-size: 13px;
+}
+
+.CodeMirror {
+    font-size: 13px;
+}
+
+.edit_mode div.cell.selected {
+    border-color: #845e7f;
+}
+
+.header-bar {
+    display: none;
 }
