@@ -30,9 +30,10 @@ COMPLETION_WAITING_DOTS="false"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(django brew git osx)
+plugins=(autojump)
 
 source $ZSH/oh-my-zsh.sh
+#source ~/antigen.zsh
 
 unsetopt correct_all
 
@@ -40,8 +41,13 @@ unsetopt correct_all
 alias ll='ls -alhG'
 alias w="w -f"
 alias vi="vim"
-alias du="du -h -d 1"
+alias du="du -sh"
 alias vact="source .venv/bin/activate"
+alias make="make -j24"
+alias apt-get="sudo apt-get"
+alias psgrep="ps aux | grep -i"
+alias grepi="grep -i"
+alias open="xdg-open"
 
 #export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/MacGPG2/bin"
 export LSCOLORS="exfxcxdxbxegedabagacad"
@@ -91,5 +97,64 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
 #PROMPT='
 #'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\u2b80'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\u2b80'%{$reset_color%}' '
 
-PROMPT='
-'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\ue0b0'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\ue0b0'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\ue0b0'%{$reset_color%}' '
+PROMPT_ORIG='
+'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\ue0b0'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$' '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\ue0b0'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\ue0b0'%{$reset_color%}' '
+
+PROMPT=$PROMPT_ORIG
+
+
+TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
+#TIMEFMT="%J  %U user %S system %P cpu %*E total"
+
+export PATH=/home/tudor/local/bin:$PATH
+
+# development vars
+export TRADEBOT_TBROOT=~/tb309
+export TRADEBOT_DSN=LONSQLDEV
+export LD_LIBRARY_PATH=~/tb309/lib
+export PATH=$PATH:~/tb309/bin:~/local/bin
+
+source ~/.build_init.sh
+
+[[ -s /home/tudor/.autojump/etc/profile.d/autojump.sh ]] && source /home/tudor/.autojump/etc/profile.d/autojump.sh
+autoload -U compinit && compinit -u
+
+
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+
+export TERM='xterm-256color'
+
+#bindkey 'OD' emacs-backward-word
+#bindkey 'OC' emacs-forward-word
+
+function preexec() {
+  timer=${timer:-$SECONDS}
+}
+
+function precmd() {
+  if [ $timer ]; then
+    timer_res=$(($SECONDS - $timer))
+    if [[ $timer_res -gt 5 ]]; then
+        export RPROMPT="${timer_res}s"
+    else
+        unset RPROMPT
+    fi
+    unset timer
+  fi
+}
+
+
+PERL_MB_OPT="--install_base \"/home/tudor/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/home/tudor/perl5"; export PERL_MM_OPT;
