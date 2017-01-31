@@ -1,3 +1,12 @@
 [submodule ".oh-my-zsh"]
 	path = .oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "zsh/submodules/history-search-multi-word"]
+	path = zsh/submodules/history-search-multi-word
+	url = git@github.com:psprint/history-search-multi-word.git
+[submodule "zsh/submodules/zsh-autosuggestions"]
+	path = zsh/submodules/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "zsh/submodules/zsh-syntax-highlighting"]
+	path = zsh/submodules/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git

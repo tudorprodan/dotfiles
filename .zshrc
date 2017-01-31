@@ -1,149 +1,74 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
-fpath=($fpath /usr/local/share/zsh/site-functions)
+_ZSH_RIGHTARROW=$'\ue0b0'
+_ZSH_NEWLINE=$'\n'
+_ZSH_AUTOJUMP_PATH=/usr/share/autojump/autojump.sh
+_ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-#ZSH_THEME="powerline"
+PROMPT="${_ZSH_NEWLINE}%F{black}%K{green} %n %F{green}%K{blue}${_ZSH_RIGHTARROW}%F{white}%K{blue} %1~ %F{blue}%k%(?..%K{red}${_ZSH_RIGHTARROW}%F{black}%K{red} ✖ %? %F{red}%k)${_ZSH_RIGHTARROW} %f%k"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
+source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
+source $HOME/.dotfiles/zsh/termsupport.zsh
+source $HOME/.dotfiles/zsh/history.zsh
 
-# Comment this out to disable weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
+# KCG build init
+[[ -S $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
 
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
+TERM='xterm-256color'  # Make sure the right thing is sent
+NO_AT_BRIDGE=1  # Disable gnome accessibility to stop the warnings
+LSCOLORS="exfxcxdxbxegedabagacad"
+EDITOR=vim
+HISTSIZE=100000
 
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+# Customize less colors
+LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
+LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
+LESS_TERMCAP_me=$(tput sgr0)
+LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
+LESS_TERMCAP_se=$(tput rmso; tput sgr0)
+LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
+LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
+LESS_TERMCAP_mr=$(tput rev)
+LESS_TERMCAP_mh=$(tput dim)
+LESS_TERMCAP_ZN=$(tput ssubm)
+LESS_TERMCAP_ZV=$(tput rsubm)
+LESS_TERMCAP_ZO=$(tput ssupm)
+LESS_TERMCAP_ZW=$(tput rsupm)
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-COMPLETION_WAITING_DOTS="false"
+# Change the default for this, default is underline
+ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(autojump)
-
-source $ZSH/oh-my-zsh.sh
-#source ~/antigen.zsh
-
-unsetopt correct_all
-
-# Customize to your needs...
-alias ll='ls -alhG'
+alias ls='ls --color=tty'
+alias l='ls -alh'
+alias ll='ls -alh'
 alias w="w -f"
 alias vi="vim"
 alias du="du -sh"
 alias vact="source .venv/bin/activate"
 alias make="make -j24"
 alias apt-get="sudo apt-get"
+alias apt="sudo apt"
 alias psgrep="ps aux | grep -i"
 alias grepi="grep -i"
 alias open="xdg-open"
 
-#export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin:/usr/local/MacGPG2/bin"
-export LSCOLORS="exfxcxdxbxegedabagacad"
-export EDITOR=vim
 
-#setopt NoMenuComplete
-
-#PROMPT='%{$fg[red]%} ➥ %{$fg_bold[green]%}%p %{$fg[green]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}# %{$reset_color%}'
-
-
-#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-
-POWERLINE_COLOR_BG_GRAY=$BG[240]
-POWERLINE_COLOR_BG_LIGHT_GRAY=$BG[240]
-POWERLINE_COLOR_BG_WHITE=$BG[255]
-
-POWERLINE_COLOR_FG_GRAY=$FG[240]
-POWERLINE_COLOR_FG_LIGHT_GRAY=$FG[240]
-POWERLINE_COLOR_FG_WHITE=$FG[255]
-
-GIT_DIRTY_COLOR=$FG[133]
-GIT_CLEAN_COLOR=$FG[118]
-GIT_PROMPT_INFO=$FG[012]
-
-ZSH_THEME_GIT_PROMPT_PREFIX=" \ue0a0 "
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$GIT_PROMPT_INFO%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$GIT_DIRTY_COLOR%}✘"
-ZSH_THEME_GIT_PROMPT_CLEAN=" %{$GIT_CLEAN_COLOR%}✔"
-
-ZSH_THEME_GIT_PROMPT_ADDED="%{$FG[082]%}✚%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$FG[166]%}✹%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$FG[160]%}✖%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$FG[220]%}➜%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$FG[082]%}═%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$FG[190]%}✭%{$reset_color%}"
-
-
-
-#PROMPT='
-#'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}$'\u2b80%{$reset_color%} '
-#RPROMPT=%{$POWERLINE_COLOR_FG_WHITE%}$' \u2b82%{$reset_color%}%{$POWERLINE_COLOR_BG_WHITE%} %{$POWERLINE_COLOR_FG_GRAY%}%D{%X}%  \u2b82%{$POWERLINE_COLOR_BG_GRAY%}%{$POWERLINE_COLOR_FG_WHITE%} %D{%Y-%m-%d}%f %{$reset_color%}'
-
-#PROMPT='
-#'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[white]%}$'\u2b80'%{$reset_color%}%{$fg[grey]%}%{$bg[white]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[white]%}$'\u2b80%{$reset_color%} '
-
-#PROMPT='
-#'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\u2b80'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$'$(git_prompt_info) '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\u2b80'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\u2b80'%{$reset_color%}' '
-
-PROMPT_ORIG='
-'%{$bg[green]%}%{$fg[black]%}' '%n' '%{$reset_color%}%{$fg[green]%}%{$bg[blue]%}$'\ue0b0'%{$reset_color%}%{$fg[white]%}%{$bg[blue]%}' '%1~$' '%{$reset_color%}%{$fg[blue]%}%(?..%{$bg[red]%}$'\ue0b0'%{$fg[black]%}' ✖ %? '%{$reset_color%}%{$fg[red]%})$'\ue0b0'%{$reset_color%}' '
-
-PROMPT=$PROMPT_ORIG
-
-
-TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
-#TIMEFMT="%J  %U user %S system %P cpu %*E total"
-
-export PATH=/home/tudor/local/bin:$PATH
-
-# development vars
-export TRADEBOT_TBROOT=~/tb309
-export TRADEBOT_DSN=LONSQLDEV
-export LD_LIBRARY_PATH=~/tb309/lib
-export PATH=$PATH:~/tb309/bin:~/local/bin
-
-source ~/.build_init.sh
-
-[[ -s /home/tudor/.autojump/etc/profile.d/autojump.sh ]] && source /home/tudor/.autojump/etc/profile.d/autojump.sh
+# Completion
+[[ -s $_ZSH_AUTOJUMP_PATH ]] && source $_ZSH_AUTOJUMP_PATH
 autoload -U compinit && compinit -u
+zstyle ':completion:*' menu select
+setopt menu_complete
 
+# Command suggestion
+[[ -r /etc/zsh_command_not_found ]] && . /etc/zsh_command_not_found
 
-export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
-export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
-export LESS_TERMCAP_me=$(tput sgr0)
-export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4) # yellow on blue
-export LESS_TERMCAP_se=$(tput rmso; tput sgr0)
-export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 7) # white
-export LESS_TERMCAP_ue=$(tput rmul; tput sgr0)
-export LESS_TERMCAP_mr=$(tput rev)
-export LESS_TERMCAP_mh=$(tput dim)
-export LESS_TERMCAP_ZN=$(tput ssubm)
-export LESS_TERMCAP_ZV=$(tput rsubm)
-export LESS_TERMCAP_ZO=$(tput ssupm)
-export LESS_TERMCAP_ZW=$(tput rsupm)
-
-export TERM='xterm-256color'
-
-#bindkey 'OD' emacs-backward-word
-#bindkey 'OC' emacs-forward-word
-
-function preexec() {
+# Time last command
+function timecmd_preexec() {
   timer=${timer:-$SECONDS}
 }
-
-function precmd() {
+function timecmd_precmd() {
   if [ $timer ]; then
     timer_res=$(($SECONDS - $timer))
     if [[ $timer_res -gt 5 ]]; then
@@ -154,7 +79,13 @@ function precmd() {
     unset timer
   fi
 }
+preexec_functions+=(timecmd_preexec)
+precmd_functions+=(timecmd_precmd)
 
+function title_precmd() {
+    emulate -L zsh
+}
 
-PERL_MB_OPT="--install_base \"/home/tudor/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/tudor/perl5"; export PERL_MM_OPT;
+# Ctrl + left/right
+bindkey ';5C' emacs-forward-word
+bindkey ';5D' emacs-backward-word
