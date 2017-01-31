@@ -12,6 +12,7 @@ source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zs
 source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 source $HOME/.dotfiles/zsh/termsupport.zsh
 source $HOME/.dotfiles/zsh/history.zsh
+source $HOME/.dotfiles/zsh/key-bindings.zsh
 
 # KCG build init
 [[ -S $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
