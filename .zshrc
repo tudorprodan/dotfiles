@@ -7,17 +7,17 @@ PROMPT="${_ZSH_NEWLINE}%F{black}%K{green} %n %F{green}%K{blue}${_ZSH_RIGHTARROW}
 
 TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
-source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 source $HOME/.dotfiles/zsh/termsupport.zsh
 source $HOME/.dotfiles/zsh/history.zsh
 source $HOME/.dotfiles/zsh/key-bindings.zsh
+source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 
 # KCG build init
 [[ -S $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
 
-TERM='xterm-256color'  # Make sure the right thing is sent
+#TERM='xterm-256color'  # Make sure the right thing is sent
 NO_AT_BRIDGE=1  # Disable gnome accessibility to stop the warnings
 LSCOLORS="exfxcxdxbxegedabagacad"
 EDITOR=vim
