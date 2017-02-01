@@ -60,7 +60,7 @@ alias open="xdg-open"
 [[ -s $_ZSH_AUTOJUMP_PATH ]] && source $_ZSH_AUTOJUMP_PATH
 autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
-setopt menu_complete
+setopt auto_menu
 
 # Command suggestion
 [[ -r /etc/zsh_command_not_found ]] && . /etc/zsh_command_not_found
