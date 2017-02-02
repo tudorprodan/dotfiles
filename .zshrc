@@ -15,7 +15,7 @@ source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zs
 source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 
 # KCG build init
-[[ -S $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
+[[ -s $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
 
 #TERM='xterm-256color'  # Make sure the right thing is sent
 NO_AT_BRIDGE=1  # Disable gnome accessibility to stop the warnings
