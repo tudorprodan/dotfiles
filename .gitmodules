@@ -1,6 +1,3 @@
-[submodule ".oh-my-zsh"]
-	path = .oh-my-zsh
-	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "zsh/submodules/history-search-multi-word"]
 	path = zsh/submodules/history-search-multi-word
 	url = git@github.com:psprint/history-search-multi-word.git
