@@ -10,14 +10,21 @@ TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 source $HOME/.dotfiles/zsh/termsupport.zsh
 source $HOME/.dotfiles/zsh/history.zsh
 source $HOME/.dotfiles/zsh/key-bindings.zsh
-source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
+# source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 
 # KCG build init
-[[ -s $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
+# [[ -s $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
 
+[[ -s $HOME/.shell_init.sh ]] && source $HOME/.shell_init.sh
+
+#if [ -n "$TMUX" ]; then
+#TERM='screen-256color'  # Make sure the right thing is sent
+#else
 #TERM='xterm-256color'  # Make sure the right thing is sent
+#fi
+
 NO_AT_BRIDGE=1  # Disable gnome accessibility to stop the warnings
 LSCOLORS="exfxcxdxbxegedabagacad"
 EDITOR=vim
@@ -39,7 +46,7 @@ LESS_TERMCAP_ZO=$(tput ssupm)
 LESS_TERMCAP_ZW=$(tput rsupm)
 
 # Change the default for this, default is underline
-ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
+# ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 
 alias ls='ls --color=tty'
 alias l='ls -alh'
@@ -48,17 +55,17 @@ alias w="w -f"
 alias vi="vim"
 alias du="du -sh"
 alias vact="source .venv/bin/activate"
-alias make="make -j24"
 alias apt-get="sudo apt-get"
 alias apt="sudo apt"
 alias psgrep="ps aux | grep -i"
 alias grepi="grep -i"
 alias open="xdg-open"
 
-
-# Completion
+# Autojump
 [[ -s $_ZSH_AUTOJUMP_PATH ]] && source $_ZSH_AUTOJUMP_PATH
 autoload -U compinit && compinit -u
+
+# Completion
 zstyle ':completion:*' menu select
 setopt auto_menu
 
@@ -87,6 +94,13 @@ function title_precmd() {
     emulate -L zsh
 }
 
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # Ctrl + left/right
-bindkey ';5C' emacs-forward-word
-bindkey ';5D' emacs-backward-word
+# bindkey ';5C' emacs-forward-word
+# bindkey ';5D' emacs-backward-word
+# bindkey '\eOC' emacs-forward-word
+# bindkey '\eOD' emacs-backward-word
+
+export PYTEST_ADDOPTS="--pdbcls=IPython.terminal.debugger:Pdb -q"
