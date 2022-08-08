@@ -1,6 +1,6 @@
 _ZSH_RIGHTARROW=$'\ue0b0'
+# _ZSH_RIGHTARROW=$''
 _ZSH_NEWLINE=$'\n'
-_ZSH_AUTOJUMP_PATH=/usr/share/autojump/autojump.sh
 _ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
 
 PROMPT="${_ZSH_NEWLINE}%F{black}%K{green} %n %F{green}%K{blue}${_ZSH_RIGHTARROW}%F{white}%K{blue} %1~ %F{blue}%k%(?..%K{red}${_ZSH_RIGHTARROW}%F{black}%K{red} ✖ %? %F{red}%k)${_ZSH_RIGHTARROW} %f%k"
@@ -14,20 +14,10 @@ source $HOME/.dotfiles/zsh/key-bindings.zsh
 # source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
 # source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 
-# KCG build init
-# [[ -s $HOME/.build_init.sh ]] && source $HOME/.build_init.sh
-
 [[ -s $HOME/.shell_init.sh ]] && source $HOME/.shell_init.sh
 
-#if [ -n "$TMUX" ]; then
-#TERM='screen-256color'  # Make sure the right thing is sent
-#else
-#TERM='xterm-256color'  # Make sure the right thing is sent
-#fi
 
-NO_AT_BRIDGE=1  # Disable gnome accessibility to stop the warnings
 LSCOLORS="exfxcxdxbxegedabagacad"
-EDITOR=vim
 HISTSIZE=100000
 
 # Customize less colors
@@ -49,10 +39,12 @@ LESS_TERMCAP_ZW=$(tput rsupm)
 # ZSH_HIGHLIGHT_STYLES[path]='fg=blue'
 
 alias ls='ls --color=tty'
-alias l='ls -alh'
+alias l='ls -lh'
 alias ll='ls -alh'
 alias w="w -f"
-alias vi="vim"
+alias vi="nvim"
+alias vim="nvim"
+alias vimdiff="nvim -d"
 alias du="du -sh"
 alias vact="source .venv/bin/activate"
 alias apt-get="sudo apt-get"
@@ -62,6 +54,7 @@ alias grepi="grep -i"
 alias open="xdg-open"
 
 # Autojump
+_ZSH_AUTOJUMP_PATH=/usr/share/autojump/autojump.zsh
 [[ -s $_ZSH_AUTOJUMP_PATH ]] && source $_ZSH_AUTOJUMP_PATH
 autoload -U compinit && compinit -u
 
@@ -102,5 +95,3 @@ function title_precmd() {
 # bindkey ';5D' emacs-backward-word
 # bindkey '\eOC' emacs-forward-word
 # bindkey '\eOD' emacs-backward-word
-
-export PYTEST_ADDOPTS="--pdbcls=IPython.terminal.debugger:Pdb -q"
