@@ -90,6 +90,9 @@ function title_precmd() {
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# .local
+[ -f ~/.local/bin/env ] && source ~/.local/bin/env
+
 # Ctrl + left/right
 # bindkey ';5C' emacs-forward-word
 # bindkey ';5D' emacs-backward-word
