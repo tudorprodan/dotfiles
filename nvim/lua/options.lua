@@ -1,8 +1,6 @@
 local opt = vim.opt
 
 opt.termguicolors = true
-vim.g.rehash256 = 1
-vim.cmd [[colorscheme molokai_match_fix]]
 
 opt.splitright = true
 opt.splitbelow = true
