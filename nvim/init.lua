@@ -25,3 +25,4 @@ require("lazy").setup("plugins", {
 
 require("options")
 require("keymaps")
+require("bclose").setup()

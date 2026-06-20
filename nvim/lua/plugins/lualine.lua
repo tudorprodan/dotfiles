@@ -8,5 +8,5 @@ return {
         options = {
             theme = 'powerline',
         },
-    }
+    },
 }
