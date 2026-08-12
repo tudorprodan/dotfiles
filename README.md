@@ -71,6 +71,46 @@ git commit -m "bump zsh plugins"
 
 Reload the shell afterwards with `exec zsh`.
 
+## Why master, and how to pin a release instead
+
+All four plugins are tracked on `master`. None of them publishes a separate
+stable branch, and every upstream README documents installation as a plain
+`git clone` with no branch argument, so `master` is the stable line in each
+case. The other branches are development ones (`develop`, `fixes/*`,
+`features/*` on zsh-autosuggestions, `approximate` and `refactor/*` on fzf-tab,
+`ci` on fast-syntax-highlighting) and should be left alone.
+
+Tags are the only real alternative, and are not worth it everywhere:
+zsh-completions is a rolling collection whose last tag sits 167 commits behind
+master, and fast-syntax-highlighting tagged v1.56 on the same day as its last
+master commit.
+
+To pin one submodule to a release tag anyway:
+
+```sh
+cd ~/.dotfiles/zsh/plugins/fzf-tab
+git fetch --tags
+git checkout v1.3.0
+cd ~/.dotfiles
+git add zsh/plugins/fzf-tab
+git commit -m "pin fzf-tab to v1.3.0"
+```
+
+Note that `git submodule update --remote` would pull that submodule back to
+master tip, because `--remote` follows the `branch` setting in `.gitmodules`.
+If you pin a tag, either drop that submodule's `branch` line, or update the
+rest by naming them explicitly:
+
+```sh
+git -C ~/.dotfiles submodule update --remote zsh/plugins/zsh-completions
+```
+
+To see what a pinned submodule is missing relative to master:
+
+```sh
+git -C ~/.dotfiles/zsh/plugins/fzf-tab log --oneline HEAD..origin/master
+```
+
 ## Add a plugin
 
 ```sh
