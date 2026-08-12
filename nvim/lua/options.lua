@@ -10,6 +10,7 @@ opt.shiftwidth = 4
 vim.bo.softtabstop = 4
 opt.expandtab = true
 opt.autoindent = true
+opt.scrolloff = 5
 
 opt.ignorecase = true
 opt.smartcase = true
@@ -34,8 +35,10 @@ opt.wildmode = 'longest:full'
 
 vim.diagnostic.config({
     virtual_text = true,
-    -- virtual_lines = { current_line = true },
-    signs = true,
+    -- virtual_text = { virt_text_pos = "right_align" },
+    virtual_lines = { current_line = true },
+    -- signs = true,
+    signs = false,
     underline = true,
     update_in_insert = false,
     float = { border = "rounded" }, -- add border to diagnostic popups
