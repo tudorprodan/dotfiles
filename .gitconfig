@@ -13,25 +13,3 @@
 
 [color]
     ui = auto
-
-[diff]
-    tool = "kdiff3"
-
-[difftool "kdiff3"]
-    path = "/usr/bin/kdiff3"
-
-[difftool "diffmerge"]
-    cmd = "diffmerge $LOCAL $REMOTE"
-
-[core]
-	excludesfile = /Users/tudor/.gitignore_global
-
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
-
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
-[push]
-	default = simple
