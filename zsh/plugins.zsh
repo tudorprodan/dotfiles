@@ -41,6 +41,25 @@ zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 # , and . step through completion groups (files vs directories vs options)
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
+# --- fast-syntax-highlighting ---
+# On first run the plugin downloads share/free_theme.zsh from its own master
+# branch (curl/wget, silently) into $FAST_WORK_DIR/secondary_theme.zsh, and
+# sources that file later when a theme is active. That fetches code from
+# outside the commit this submodule is pinned to, which defeats the point of
+# pinning. The file it wants is already in the repo, so put it there ourselves
+# and the download never fires.
+#
+# FAST_WORK_DIR is set explicitly rather than left to the plugin: its own
+# default falls back to ~/.cache/fsh whenever the primary directory is not
+# writable, which includes the case where it does not exist yet, so the
+# destination is otherwise hard to predict.
+typeset -g FAST_WORK_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/fast-syntax-highlighting
+[[ -d $FAST_WORK_DIR ]] || mkdir -p $FAST_WORK_DIR
+[[ -e $FAST_WORK_DIR/secondary_theme.zsh || \
+   ! -r $ZSH_PLUGIN_DIR/fast-syntax-highlighting/share/free_theme.zsh ]] ||
+  cp $ZSH_PLUGIN_DIR/fast-syntax-highlighting/share/free_theme.zsh \
+     $FAST_WORK_DIR/secondary_theme.zsh
+
 # --- zsh-autosuggestions ---
 # Grey ghost text. Bump to fg=244 or similar if it is too dim to read.
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
