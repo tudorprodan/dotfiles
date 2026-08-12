@@ -50,16 +50,10 @@ alias psgrep="ps aux | grep -i"
 alias grepi="grep -i"
 alias open="xdg-open"
 
-# Autojump
-_ZSH_AUTOJUMP_PATH=/usr/share/autojump/autojump.zsh
-[[ -s $_ZSH_AUTOJUMP_PATH ]] && source $_ZSH_AUTOJUMP_PATH
-autoload -U compinit && compinit -u
-
-# Completion
-zstyle ':completion:*' menu select
-setopt auto_menu
-
-# Plugins, after compinit since some of them build on completion
+# Completion, then external tools, then plugins -- order matters, see
+# the comments at the top of completion.zsh and plugins.zsh
+source $HOME/.dotfiles/zsh/completion.zsh
+source $HOME/.dotfiles/zsh/tools.zsh
 source $HOME/.dotfiles/zsh/plugins.zsh
 
 # Command suggestion
