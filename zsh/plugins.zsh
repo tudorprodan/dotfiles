@@ -1,53 +1,26 @@
 ## Plugins
 #
-# Plugins are vendored into zsh/plugins/ (gitignored), not tracked as submodules.
-# On a new machine, or to update, run:  zsh-plugins-sync
+# Plugins are git submodules under zsh/plugins/, pinned to a commit that is
+# recorded in this repo. Nothing here fetches code: the pin only moves when you
+# deliberately update it. See README.md for the clone and update commands.
 #
-# Loading is guarded: a machine that has not synced yet still gets a working
-# shell, just without the extras.
+# Loading is guarded, so a clone without submodules still gets a working shell,
+# just without the extras.
 #
 # This file must be sourced after completion.zsh -- see the note there.
 
 ZSH_PLUGIN_DIR=$HOME/.dotfiles/zsh/plugins
 
-# "name url" pairs. Everything here gets cloned by zsh-plugins-sync.
-typeset -ga _ZSH_PLUGINS=(
-  "zsh-completions https://github.com/zsh-users/zsh-completions.git"
-  "fzf-tab https://github.com/Aloxaf/fzf-tab.git"
-  "fast-syntax-highlighting https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
-  "zsh-autosuggestions https://github.com/zsh-users/zsh-autosuggestions.git"
-)
-
 # Sourced in this order, which is load-bearing:
 #   fzf-tab must come after compinit but before anything that wraps widgets,
 #   and the two widget wrappers go last.
-# zsh-completions is deliberately absent: it only adds to $fpath, and
-# completion.zsh does that before compinit.
+# zsh-completions is a submodule too but is deliberately absent here: it only
+# adds to $fpath, and completion.zsh does that before compinit.
 typeset -ga _ZSH_PLUGIN_LOAD=(
   fzf-tab
   fast-syntax-highlighting
   zsh-autosuggestions
 )
-
-# Install anything missing, fast-forward anything already there.
-function zsh-plugins-sync {
-  emulate -L zsh
-  local entry name url dir
-  mkdir -p $ZSH_PLUGIN_DIR
-  for entry in $_ZSH_PLUGINS; do
-    name=${entry%% *}
-    url=${entry#* }
-    dir=$ZSH_PLUGIN_DIR/$name
-    if [[ -d $dir/.git ]]; then
-      print -P "%F{blue}==>%f updating $name"
-      git -C $dir pull --quiet --ff-only || print -P "%F{red}==>%f $name: pull failed"
-    else
-      print -P "%F{green}==>%f installing $name"
-      git clone --depth 1 --quiet $url $dir || print -P "%F{red}==>%f $name: clone failed"
-    fi
-  done
-  print -P "%F{green}==>%f done, run 'exec zsh' to reload"
-}
 
 ## Plugin settings (must be set before the plugin is sourced)
 
@@ -76,15 +49,16 @@ ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
 ## Load
 
-if [[ -d $ZSH_PLUGIN_DIR ]]; then
-  () {
-    local name f
-    for name in $_ZSH_PLUGIN_LOAD; do
-      for f in $ZSH_PLUGIN_DIR/$name/$name.{plugin.zsh,zsh}; do
-        [[ -r $f ]] && { source $f; break }
-      done
+() {
+  local name f
+  local -i loaded=0
+  for name in $_ZSH_PLUGIN_LOAD; do
+    for f in $ZSH_PLUGIN_DIR/$name/$name.{plugin.zsh,zsh}; do
+      [[ -r $f ]] && { source $f; (( loaded++ )); break }
     done
-  }
-else
-  print -P "%F{yellow}==>%f zsh plugins not installed, run 'zsh-plugins-sync'"
-fi
+  done
+  # An uninitialised submodule leaves an empty directory behind, so check that
+  # something actually loaded rather than that the directory exists.
+  (( loaded == $#_ZSH_PLUGIN_LOAD )) ||
+    print -P "%F{yellow}==>%f zsh plugins missing, run: git -C ~/.dotfiles submodule update --init"
+}
