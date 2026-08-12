@@ -10,9 +10,6 @@ TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 source $HOME/.dotfiles/zsh/termsupport.zsh
 source $HOME/.dotfiles/zsh/history.zsh
 source $HOME/.dotfiles/zsh/key-bindings.zsh
-# source $HOME/.dotfiles/zsh/submodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# source $HOME/.dotfiles/zsh/submodules/zsh-autosuggestions/zsh-autosuggestions.zsh
-# source $HOME/.dotfiles/zsh/submodules/history-search-multi-word/history-search-multi-word.plugin.zsh
 
 [[ -s $HOME/.shell_init.sh ]] && source $HOME/.shell_init.sh
 
@@ -61,6 +58,9 @@ autoload -U compinit && compinit -u
 # Completion
 zstyle ':completion:*' menu select
 setopt auto_menu
+
+# Plugins, after compinit since some of them build on completion
+source $HOME/.dotfiles/zsh/plugins.zsh
 
 # Command suggestion
 [[ -r /etc/zsh_command_not_found ]] && . /etc/zsh_command_not_found
