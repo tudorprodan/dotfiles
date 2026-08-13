@@ -71,4 +71,9 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
 # Skip suggestions for very long lines, so pasting a huge command stays snappy.
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
 
+# Suggest from history, then from completions -- the second half is what makes
+# fish feel like it knows commands you have never run. It forks a zpty per
+# suggestion, so drop 'completion' if typing ever feels laggy.
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 source $ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh

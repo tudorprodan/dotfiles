@@ -30,6 +30,10 @@ else
 fi
 unset _zcompdump _zcompdump_stale
 
+# Provides bash's complete/compgen, so the many tools that ship only a bash
+# completion script register instead of erroring. ~1.5ms, must follow compinit.
+autoload -U +X bashcompinit && bashcompinit
+
 zmodload zsh/complist
 
 # GNU ls reads LS_COLORS; the LSCOLORS in .zshrc is the BSD/macOS spelling and
