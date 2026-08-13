@@ -18,6 +18,15 @@ ln -sfn ~/.dotfiles/nvim .config/nvim
 # Otherwise /etc/zsh/zshrc runs its own uncached compinit before ours.
 grep -qs skip_global_compinit .zshenv || echo 'skip_global_compinit=1' >> .zshenv
 
+# ~/.shell_init.sh is per-machine and not in this repo. Wire it into both
+# shells: .zshenv covers every zsh including 'ssh box cmd', .profile is bash's
+# login entry point.
+grep -qs shell_init .zshenv || cat >> .zshenv <<'EOF'
+typeset -U path PATH
+[ -r "$HOME/.shell_init.sh" ] && . "$HOME/.shell_init.sh"
+EOF
+grep -qs shell_init .profile 2>/dev/null || echo '[ -r "$HOME/.shell_init.sh" ] && . "$HOME/.shell_init.sh"' >> .profile
+
 # Last, because it is the only step that needs the network.
 git -C ~/.dotfiles submodule update --init
 

@@ -6,9 +6,6 @@ source $HOME/.dotfiles/zsh/options.zsh
 source $HOME/.dotfiles/zsh/history.zsh
 source $HOME/.dotfiles/zsh/key-bindings.zsh
 
-[[ -s $HOME/.shell_init.sh ]] && source $HOME/.shell_init.sh
-
-
 LSCOLORS="exfxcxdxbxegedabagacad"
 
 # less colors for man pages moved to zsh/tools.zsh, next to the bat setup
