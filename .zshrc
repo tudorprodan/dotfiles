@@ -1,3 +1,7 @@
+# Keeps $path unique. Dedupes retroactively, so it also cleans up what
+# .zshenv already prepended.
+typeset -U path PATH
+
 TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
 source $HOME/.dotfiles/zsh/prompt.zsh
