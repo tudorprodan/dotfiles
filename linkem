@@ -22,4 +22,4 @@ grep -qs skip_global_compinit .zshenv || echo 'skip_global_compinit=1' >> .zshen
 git -C ~/.dotfiles submodule update --init
 
 echo "done -- start a new shell with: exec zsh"
-echo "optional: sudo apt install zsh git fzf zoxide eza bat fd-find ripgrep neovim tmux"
+echo "optional: sudo apt install zsh git fzf zoxide eza bat fd-find ripgrep tmux"
