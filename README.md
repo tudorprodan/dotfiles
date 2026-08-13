@@ -13,10 +13,14 @@ git clone git@github.com:tudorprodan/dotfiles.git ~/.dotfiles
 ~/.dotfiles/linkem
 ```
 
-`linkem` makes the symlinks, adds `skip_global_compinit=1` to `~/.zshenv` (so
-`/etc/zsh/zshrc` does not run its own slow `compinit` before ours), and fills in
-the plugin submodules. It **overwrites** anything already at those paths, so on
-a box with existing config, move what you want to keep first.
+`linkem` makes the symlinks, wires `~/.shell_init.sh` into `~/.profile` for
+bash, and fills in the plugin submodules. It **overwrites** anything already at
+those paths, so on a box with existing config, move what you want to keep first.
+
+`.zshenv` is one of the symlinked files. It sets `skip_global_compinit=1` (so
+`/etc/zsh/zshrc` does not run its own slow `compinit` before ours) and sources
+`~/.shell_init.sh`, which is per-machine and deliberately not in this repo —
+that is where machine-local `PATH` entries and things like `~/.cargo/env` go.
 
 If the plugin directories are empty, zsh prints a reminder on startup. Fill them
 in with:

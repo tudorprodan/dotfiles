@@ -6,6 +6,7 @@ set -e
 
 cd ~
 
+ln -sfn .dotfiles/.zshenv           .zshenv
 ln -sfn .dotfiles/.zshrc            .zshrc
 ln -sfn .dotfiles/.gitconfig        .gitconfig
 ln -sfn .dotfiles/.gitignore_global .gitignore_global
@@ -15,14 +16,8 @@ ln -sfn .dotfiles/zsh               .zsh
 mkdir -p .config
 ln -sfn ~/.dotfiles/nvim .config/nvim
 
-# Otherwise /etc/zsh/zshrc runs its own uncached compinit before ours.
-grep -qs skip_global_compinit .zshenv || echo 'skip_global_compinit=1' >> .zshenv
-
-# ~/.shell_init.sh is per-machine and not in this repo. Wire it into both
-# shells: .zshenv covers every zsh including 'ssh box cmd', .profile is bash's
-# login entry point.
-grep -qs shell_init .zshenv 2>/dev/null ||
-  echo '[ -r "$HOME/.shell_init.sh" ] && . "$HOME/.shell_init.sh"' >> .zshenv
+# ~/.shell_init.sh is per-machine and not in this repo. .zshenv sources it for
+# zsh; .profile is bash's login entry point and is not a symlink, so append.
 grep -qs shell_init .profile 2>/dev/null ||
   echo '[ -r "$HOME/.shell_init.sh" ] && . "$HOME/.shell_init.sh"' >> .profile
 
