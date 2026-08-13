@@ -3,8 +3,12 @@ if [ -z "$HISTFILE" ]; then
     HISTFILE=$HOME/.zsh_history
 fi
 
-HISTSIZE=10000
-SAVEHIST=10000
+# HISTSIZE is the in-memory list, SAVEHIST is what actually gets written to
+# HISTFILE. SAVEHIST was the binding constraint before: it capped the saved
+# history at 10k no matter what HISTSIZE said. Keeping HISTSIZE the larger of
+# the two leaves hist_expire_dups_first room to drop duplicates before saving.
+HISTSIZE=120000
+SAVEHIST=100000
 
 # Show history
 case $HIST_STAMPS in
@@ -17,8 +21,11 @@ esac
 setopt append_history
 setopt extended_history
 setopt hist_expire_dups_first
-setopt hist_ignore_dups # ignore duplication command history list
+setopt hist_ignore_all_dups  # drop an older copy of a command anywhere in the
+                             # list, not just when it repeats back to back
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-setopt share_history # share command history data
+setopt share_history         # share command history data
+setopt hist_reduce_blanks    # collapse redundant whitespace before saving
+setopt hist_find_no_dups     # do not show the same line twice when searching

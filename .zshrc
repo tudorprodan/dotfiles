@@ -8,6 +8,7 @@ PROMPT="${_ZSH_NEWLINE}%F{black}%K{green} %n@%m %F{green}%K{blue}${_ZSH_RIGHTARR
 TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
 source $HOME/.dotfiles/zsh/termsupport.zsh
+source $HOME/.dotfiles/zsh/options.zsh
 source $HOME/.dotfiles/zsh/history.zsh
 source $HOME/.dotfiles/zsh/key-bindings.zsh
 
@@ -15,7 +16,6 @@ source $HOME/.dotfiles/zsh/key-bindings.zsh
 
 
 LSCOLORS="exfxcxdxbxegedabagacad"
-HISTSIZE=100000
 
 # Customize less colors
 LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green

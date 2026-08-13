@@ -73,6 +73,28 @@ bindkey '\C-x\C-e' edit-command-line
 # file rename magick
 bindkey "^[m" copy-prev-shell-word
 
+# Treat / - and . as word boundaries, so [Ctrl-w] and [Alt-b] stop at each path
+# component instead of swallowing a whole path. This is the zsh default with
+# those three characters removed.
+WORDCHARS='*?_[]~=&;!#$%^(){}<>'
+
+bindkey '^[r' redo                                    # [Alt-r] - redo ([Ctrl-_] is already undo)
+
+# [Esc-Esc] - toggle sudo at the front of the line. On an empty line it recalls
+# the previous command first, for the usual "forgot sudo" case.
+function toggle-sudo {
+  [[ -z $BUFFER ]] && zle up-history
+  if [[ $BUFFER == "sudo "* ]]; then
+    BUFFER=${BUFFER#sudo }
+    (( CURSOR -= 5 ))
+  else
+    BUFFER="sudo $BUFFER"
+    (( CURSOR += 5 ))
+  fi
+}
+zle -N toggle-sudo
+bindkey '^[^[' toggle-sudo
+
 # consider emacs keybindings:
 
 #bindkey -e  ## emacs key bindings
