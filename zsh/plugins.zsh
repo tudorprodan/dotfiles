@@ -1,16 +1,10 @@
 ## Plugins
 #
-# Plugins are git submodules under zsh/plugins/, pinned to a commit recorded in
-# this repo. Nothing here fetches code: the pin only moves when you deliberately
-# update it. See README.md for the clone and update commands.
+# Git submodules under zsh/plugins/, pinned to a commit in this repo; nothing
+# fetches at startup. See README.md.
 #
-# This file must be sourced after completion.zsh -- see the note there.
-#
-# The order of the blocks below matters: fzf-tab has to load after compinit but
-# before anything that wraps zle widgets, so the two wrappers come last.
-#
-# zsh-completions is a submodule too, but is not sourced here. It only adds to
-# $fpath, which completion.zsh does before compinit.
+# Must load after completion.zsh, and in this order: fzf-tab needs compinit
+# first, and the widget-wrapping plugins have to come last.
 
 ZSH_PLUGIN_DIR=$HOME/.dotfiles/zsh/plugins
 
@@ -24,17 +18,14 @@ fi
 ## fzf-tab -- replaces the completion menu with a fuzzy finder
 # ==================================
 
-# Preview the directory you are about to cd into
 if command -v eza >/dev/null; then
   zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
   zstyle ':fzf-tab:complete:(z|j):*' fzf-preview 'eza -1 --color=always $realpath'
 else
   zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color=always $realpath'
 fi
-# Show the value of a variable you are completing
 zstyle ':fzf-tab:complete:(-parameter-|-brace-parameter-|export|unset|expand):*' \
   fzf-preview 'echo ${(P)word}'
-# Accept with tab as well as enter, and keep the popup compact
 zstyle ':fzf-tab:*' fzf-flags --height=50% --layout=reverse --border
 zstyle ':fzf-tab:*' fzf-bindings 'tab:accept'
 # , and . step through completion groups (files vs directories vs options)
@@ -46,14 +37,8 @@ source $ZSH_PLUGIN_DIR/fzf-tab/fzf-tab.plugin.zsh
 ## fast-syntax-highlighting -- colours the command line as you type
 # ==================================
 
-# On first run the plugin downloads share/free_theme.zsh from its own master
-# branch, silently, and sources the result later. That pulls code from outside
-# the commit this submodule is pinned to. The file it wants is already in the
-# repo, so put it in place ourselves and the download never fires.
-#
-# FAST_WORK_DIR is set explicitly because the plugin's own default falls back to
-# ~/.cache/fsh whenever the directory is not writable, which includes the case
-# where it does not exist yet.
+# Without this the plugin silently downloads its theme from master on first run,
+# outside the commit this submodule is pinned to. The file is already in the repo.
 FAST_WORK_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/fast-syntax-highlighting
 [[ -d $FAST_WORK_DIR ]] || mkdir -p $FAST_WORK_DIR
 [[ -e $FAST_WORK_DIR/secondary_theme.zsh ]] ||
@@ -63,17 +48,13 @@ FAST_WORK_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/fast-syntax-highlighting
 source $ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 
-## zsh-autosuggestions -- grey ghost text from history
+## zsh-autosuggestions -- grey ghost text
 # ==================================
 
-# Bump to fg=244 or similar if the grey is too dim to read.
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
-# Skip suggestions for very long lines, so pasting a huge command stays snappy.
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'   # bump to fg=244 if too dim to read
 ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-
-# Suggest from history, then from completions -- the second half is what makes
-# fish feel like it knows commands you have never run. It forks a zpty per
-# suggestion, so drop 'completion' if typing ever feels laggy.
+# 'completion' is what suggests commands you have never run. It forks a zpty per
+# suggestion; drop it if typing ever feels laggy.
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 
 source $ZSH_PLUGIN_DIR/zsh-autosuggestions/zsh-autosuggestions.plugin.zsh

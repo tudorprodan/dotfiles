@@ -1,17 +1,13 @@
 ## External tool integration
 #
-# Everything here is guarded, so a machine missing the tool just gets a shell
-# without that feature rather than an error.
+# Everything here is guarded: a machine missing the tool just loses the feature.
 
 ## fzf -- Ctrl-R history, Ctrl-T files, Alt-C cd
 #
-# fzf >= 0.48 can print its own integration; older ones (Debian/Ubuntu) ship it
-# as files. Only the key bindings are loaded: fzf's completion.zsh provides the
-# '**<TAB>' trigger, which fzf-tab supersedes.
-# The [[ -t 0 ]] guard matters: fzf's key-bindings.zsh saves and restores the
-# shell options, and restoring 'zle' fails noisily in a shell with no terminal,
-# e.g. 'zsh -i -c ...' from a script. Testing -o zle does not work here, it is
-# still set in that case.
+# fzf >= 0.48 prints its own integration; older Debian/Ubuntu ships it as files.
+# Only key bindings: fzf's completion.zsh is the '**<TAB>' trigger, superseded
+# by fzf-tab. The [[ -t 0 ]] guard stops fzf's option save/restore from failing
+# noisily in a shell with no terminal ('zsh -i -c ...' from a script).
 if command -v fzf >/dev/null && [[ -t 0 ]]; then
   if fzf --zsh >/dev/null 2>&1; then
     source <(fzf --zsh)
@@ -24,8 +20,7 @@ if command -v fzf >/dev/null && [[ -t 0 ]]; then
     unset _f
   fi
 
-  # Use fd for the file/directory widgets: respects .gitignore and skips .git,
-  # which matters in big source trees.
+  # fd respects .gitignore and skips .git, which matters in big source trees.
   if command -v fdfind >/dev/null; then
     export FZF_CTRL_T_COMMAND='fdfind --type f --hidden --exclude .git'
     export FZF_ALT_C_COMMAND='fdfind --type d --hidden --exclude .git'
@@ -46,8 +41,8 @@ if [[ -n $_bat ]]; then
   export MANPAGER="sh -c 'col -bx | $_bat -l man -p'"
   export MANROFFOPT='-c'   # without it groff >= 1.23 output comes out garbled
 else
-  # These must be exported or less, a child process, never sees them. Each one
-  # forks tput, so only boxes without bat pay for them.
+  # Must be exported or less never sees them. Each forks tput, so only boxes
+  # without bat pay for them.
   export LESS_TERMCAP_mb=$(tput bold; tput setaf 2) # green
   export LESS_TERMCAP_md=$(tput bold; tput setaf 6) # cyan
   export LESS_TERMCAP_me=$(tput sgr0)
@@ -67,8 +62,7 @@ unset _bat
 
 ## zoxide -- frecency based cd, replaces autojump
 #
-# --cmd j keeps the autojump muscle memory: 'j foo' jumps, 'ji foo' picks
-# interactively. Drop the flag to use the upstream default of 'z' / 'zi'.
+# --cmd j keeps the autojump muscle memory: 'j foo' jumps, 'ji foo' picks.
 if command -v zoxide >/dev/null; then
   eval "$(zoxide init zsh --cmd j)"
 fi

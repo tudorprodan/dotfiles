@@ -3,14 +3,11 @@ if [ -z "$HISTFILE" ]; then
     HISTFILE=$HOME/.zsh_history
 fi
 
-# HISTSIZE is the in-memory list, SAVEHIST is what actually gets written to
-# HISTFILE. SAVEHIST was the binding constraint before: it capped the saved
-# history at 10k no matter what HISTSIZE said. Keeping HISTSIZE the larger of
-# the two leaves hist_expire_dups_first room to drop duplicates before saving.
+# SAVEHIST is what gets written; keeping HISTSIZE (in-memory) larger leaves
+# hist_expire_dups_first room to drop duplicates before saving.
 HISTSIZE=120000
 SAVEHIST=100000
 
-# Show history
 case $HIST_STAMPS in
   "mm/dd/yyyy") alias history='fc -fl 1' ;;
   "dd.mm.yyyy") alias history='fc -El 1' ;;
