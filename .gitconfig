@@ -13,3 +13,17 @@
 
 [color]
     ui = auto
+
+# delta, when it is installed. git runs these values through a shell, so the fallback keeps this config working unchanged on boxes without delta.
+[core]
+    pager = "if command -v delta >/dev/null 2>&1; then exec delta; else exec ${PAGER:-less}; fi"
+[interactive]
+    diffFilter = "if command -v delta >/dev/null 2>&1; then exec delta --color-only; else exec cat; fi"
+[delta]
+    navigate = true      # n and N jump between files in the diff
+    # line-numbers = true
+    dark = true
+[diff]
+    colorMoved = default # show moved lines differently from added/removed ones
+[merge]
+    conflictStyle = zdiff3
