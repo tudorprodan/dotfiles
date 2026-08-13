@@ -16,6 +16,10 @@ ln -sfn .dotfiles/zsh               .zsh
 mkdir -p .config
 ln -sfn ~/.dotfiles/nvim .config/nvim
 
+# Only skills/ -- the rest of ~/.claude is machine-local state and credentials.
+mkdir -p .claude
+ln -sfn ~/.dotfiles/claude/skills .claude/skills
+
 # ~/.shell_init.sh is per-machine and not in this repo. .zshenv sources it for
 # zsh; .profile is bash's login entry point and is not a symlink, so append.
 grep -qs shell_init .profile 2>/dev/null ||
