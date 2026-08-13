@@ -9,30 +9,20 @@ move the pin and commit it — nothing fetches anything at shell startup.
 ## Clone on a new box
 
 ```sh
-git clone --recurse-submodules git@github.com:tudorprodan/dotfiles.git ~/.dotfiles
+git clone git@github.com:tudorprodan/dotfiles.git ~/.dotfiles
+~/.dotfiles/linkem
 ```
 
-If the repo is already cloned without submodules, the plugin directories will be
-empty and zsh will print a reminder on startup. Fill them in with:
+`linkem` makes the symlinks, adds `skip_global_compinit=1` to `~/.zshenv` (so
+`/etc/zsh/zshrc` does not run its own slow `compinit` before ours), and fills in
+the plugin submodules. It **overwrites** anything already at those paths, so on
+a box with existing config, move what you want to keep first.
+
+If the plugin directories are empty, zsh prints a reminder on startup. Fill them
+in with:
 
 ```sh
-git -C ~/.dotfiles submodule update --init --recursive
-```
-
-Then link the files into `$HOME`, e.g.:
-
-```sh
-ln -s ~/.dotfiles/.zshrc ~/.zshrc
-ln -s ~/.dotfiles/zsh ~/.zsh
-ln -s ~/.dotfiles/.tmux.conf ~/.tmux.conf
-ln -s ~/.dotfiles/.gitconfig ~/.gitconfig
-```
-
-`~/.zshenv` is deliberately *not* a symlink, but it needs one line so that
-`/etc/zsh/zshrc` does not run its own slow `compinit` before ours:
-
-```sh
-echo 'skip_global_compinit=1' | cat - ~/.zshenv > /tmp/z && mv /tmp/z ~/.zshenv
+git -C ~/.dotfiles submodule update --init
 ```
 
 ## Update one plugin to the top of master

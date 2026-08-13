@@ -1,0 +1,25 @@
+#!/bin/sh
+# Set up this repo on a new box. Assumes it is cloned to ~/.dotfiles.
+# Overwrites whatever is already at these paths, so set -e catches real errors
+# rather than "file exists". -n so an existing symlink is replaced, not followed.
+set -e
+
+cd ~
+
+ln -sfn .dotfiles/.zshrc            .zshrc
+ln -sfn .dotfiles/.gitconfig        .gitconfig
+ln -sfn .dotfiles/.gitignore_global .gitignore_global
+ln -sfn .dotfiles/.tmux.conf        .tmux.conf
+ln -sfn .dotfiles/zsh               .zsh
+
+mkdir -p .config
+ln -sfn ~/.dotfiles/nvim .config/nvim
+
+# Otherwise /etc/zsh/zshrc runs its own uncached compinit before ours.
+grep -qs skip_global_compinit .zshenv || echo 'skip_global_compinit=1' >> .zshenv
+
+# Last, because it is the only step that needs the network.
+git -C ~/.dotfiles submodule update --init
+
+echo "done -- start a new shell with: exec zsh"
+echo "optional: sudo apt install zsh git fzf zoxide eza bat fd-find ripgrep neovim tmux"

@@ -1,5 +1,3 @@
-_ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
-
 TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
 source $HOME/.dotfiles/zsh/prompt.zsh
@@ -60,10 +58,6 @@ function timecmd_precmd() {
 }
 preexec_functions+=(timecmd_preexec)
 precmd_functions+=(timecmd_precmd)
-
-function title_precmd() {
-    emulate -L zsh
-}
 
 # FZF
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
