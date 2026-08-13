@@ -1,6 +1,6 @@
 [user]
-	name = Tudor Prodan
-	email = tudor.prodan@gmail.com
+    name = Tudor Prodan
+    email = tudor.prodan@gmail.com
 
 [alias]
     st = "status -sb"

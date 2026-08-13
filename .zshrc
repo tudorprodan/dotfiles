@@ -1,12 +1,8 @@
-_ZSH_RIGHTARROW=$'\ue0b0'
-# _ZSH_RIGHTARROW=$''
-_ZSH_NEWLINE=$'\n'
 _ZSH_THEME_TERM_TITLE_IDLE="%n@%m: %~"
-
-PROMPT="${_ZSH_NEWLINE}%F{black}%K{green} %n@%m %F{green}%K{blue}${_ZSH_RIGHTARROW}%F{white}%K{blue} %1~ %F{blue}%k%(?..%K{red}${_ZSH_RIGHTARROW}%F{black}%K{red} ✖ %? %F{red}%k)${_ZSH_RIGHTARROW} %f%k"
 
 TIMEFMT="%J  [%U user] [%S system] [%P cpu] [%*E total]"
 
+source $HOME/.dotfiles/zsh/prompt.zsh
 source $HOME/.dotfiles/zsh/termsupport.zsh
 source $HOME/.dotfiles/zsh/options.zsh
 source $HOME/.dotfiles/zsh/history.zsh
