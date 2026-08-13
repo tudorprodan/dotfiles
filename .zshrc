@@ -49,6 +49,7 @@ alias apt="sudo apt"
 alias psgrep="ps aux | grep -i"
 alias grepi="grep -i"
 alias open="xdg-open"
+alias fd="fdfind"
 
 # Completion, then external tools, then plugins -- order matters, see
 # the comments at the top of completion.zsh and plugins.zsh
