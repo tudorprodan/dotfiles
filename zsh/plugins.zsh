@@ -47,6 +47,13 @@ FAST_WORK_DIR=${XDG_CACHE_HOME:-$HOME/.cache}/fast-syntax-highlighting
 
 source $ZSH_PLUGIN_DIR/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+# Must come after the source above: the plugin loads its theme there, which
+# would overwrite anything set earlier. Defaults are fg=magenta (colour 5), too
+# dark to read on black. Directories are a separate key from files.
+FAST_HIGHLIGHT_STYLES[path]='fg=183'
+FAST_HIGHLIGHT_STYLES[path_pathseparator]='fg=183'
+FAST_HIGHLIGHT_STYLES[path-to-dir]='fg=183,underline'
+
 
 ## zsh-autosuggestions -- grey ghost text
 # ==================================
