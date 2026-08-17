@@ -29,4 +29,4 @@ grep -qs shell_init .profile 2>/dev/null ||
 git -C ~/.dotfiles submodule update --init
 
 echo "done -- start a new shell with: exec zsh"
-echo "optional: sudo apt install zsh git fzf zoxide eza bat fd-find ripgrep tmux"
+echo "optional: sudo apt install zsh git fzf zoxide eza bat fd-find ripgrep tmux git-delta"
